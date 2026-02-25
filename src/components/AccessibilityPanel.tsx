@@ -7,3 +7,5 @@ export function AccessibilityPanel () {
     </div>
   );
 }
+
+export default AccessibilityPanel;

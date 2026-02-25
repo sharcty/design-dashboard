@@ -7,3 +7,5 @@ export function PreviewWorkspace () {
     </div>
   );
 }
+
+export default PreviewWorkspace;
