@@ -14,7 +14,6 @@ export function ColorPicker() {
       </div>
 
       <div className="space-y-4">
-        {/* Color input */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Base Color
@@ -32,8 +31,11 @@ export function ColorPicker() {
                 }}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
               />
+              {/*TODO: decide if I want to "validate" color picker as well*/}
               <div
-                className="h-12 rounded-lg border-2 border-gray-300 cursor-pointer hover:border-gray-400 transition-colors"
+                className={`h-12 rounded-lg border-2 cursor-pointer transition-colors duration-200 ease-in-out
+                  ${isValid ? 'border-gray-300 hover:border-gray-400' : 'border-red-500'}
+                `}
                 style={{ backgroundColor: color }}
               />
             </div>
@@ -45,34 +47,33 @@ export function ColorPicker() {
                 setInputValue(value)
                 const isHex = /^#?([0-9A-F]{3}|[0-9A-F]{6})$/i.test(value)
                 setIsValid(isHex)
+                if (isHex) {
+                  setColor(value.startsWith('#') ? value : `#${value}`)
+                }
               }}
               onBlur={() => {
                 if (isValid) {
-                  setColor(inputValue)
-                  setInputValue(inputValue)
+                  setColor(
+                    inputValue.startsWith('#') ? inputValue : `#${inputValue}`,
+                  )
+                  setInputValue(inputValue.toUpperCase())
                 }
               }}
               className={`w-28 px-3 py-2 border rounded-lg font-mono text-sm transition-all duration-200 ease-in-out
-  ${
-    isValid
-      ? 'border-gray-300 focus:ring-2 focus:ring-blue-500'
-      : 'border-red-500 focus:ring-2 focus:ring-red-500'
-  }
-`}
+                ${isValid ? 'border-gray-300 focus:ring-2 focus:ring-blue-500' : 'border-red-500 focus:ring-2 focus:ring-red-500'}
+              `}
               placeholder="#000000"
             />
           </div>
-          {!isValid && (
+          <div className="h-5 relative">
             <p
-              className={`text-xs mt-1 transition-all duration-200 ${
-                isValid
-                  ? 'opacity-0 translate-y-[-4px]'
-                  : 'opacity-100 translate-y-0 text-red-500'
-              }`}
+              className={`absolute left-0 text-xs text-red-500 transition-all duration-200 ease-in-out
+                ${isValid ? 'opacity-0 translate-y-[-4px]' : 'opacity-100 translate-y-0'}
+              `}
             >
               Please enter a valid HEX color
             </p>
-          )}
+          </div>
         </div>
       </div>
     </div>
