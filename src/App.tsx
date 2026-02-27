@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar'
 import PreviewWorkspace from './components/PreviewWorkspace'
 import TokensPanel from './components/TokensPanel'
 import AccessibilityPanel from './components/AccessibilityPanel'
+import ColorPicker from './components/ui/ColorPicker'
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
       <div className="h-12 bg-white shadow flex items-center px-4">
         <TopBar />
       </div>
+
+      <ColorPicker></ColorPicker>
 
       {/* 2️⃣ Main content: Sidebar + Preview */}
       <div className="flex flex-1 gap-4 p-4">
