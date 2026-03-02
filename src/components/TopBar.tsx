@@ -1,11 +1,7 @@
-import * as React from 'react';
+import * as React from 'react'
 
-export function TopBar () {
-  return (
-    <div>
-      TopBar
-    </div>
-  );
+export function TopBar() {
+  return <div>TopBar</div>
 }
 
-export default TopBar;
+export default TopBar

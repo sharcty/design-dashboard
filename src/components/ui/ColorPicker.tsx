@@ -1,10 +1,18 @@
 import { Palette } from 'lucide-react'
 import * as React from 'react'
 
-export function ColorPicker() {
-  const [color, setColor] = React.useState('#2563eb')
-  const [inputValue, setInputValue] = React.useState(color)
+type ColorPickerProps = {
+  value: string
+  onChange: (color: string) => void
+}
+
+export function ColorPicker({ value, onChange }: ColorPickerProps) {
+  const [inputValue, setInputValue] = React.useState(value)
   const [isValid, setIsValid] = React.useState(true)
+
+  React.useEffect(() => {
+    setInputValue(value)
+  }, [value])
 
   return (
     <div className="bg-white rounded-xl border-2 border-gray-200 p-6 shadow-lg">
@@ -22,10 +30,10 @@ export function ColorPicker() {
             <div className="relative flex-1">
               <input
                 type="color"
+                value={value}
                 aria-label="Select base color"
-                value={color}
                 onChange={(e) => {
-                  setColor(e.target.value)
+                  onChange(e.target.value)
                   setInputValue(e.target.value)
                   setIsValid(true)
                 }}
@@ -36,7 +44,7 @@ export function ColorPicker() {
                 className={`h-12 rounded-lg border-2 cursor-pointer transition-colors duration-200 ease-in-out
                   ${isValid ? 'border-gray-300 hover:border-gray-400' : 'border-red-500'}
                 `}
-                style={{ backgroundColor: color }}
+                style={{ backgroundColor: value }}
               />
             </div>
             <input
@@ -48,12 +56,12 @@ export function ColorPicker() {
                 const isHex = /^#?([0-9A-F]{3}|[0-9A-F]{6})$/i.test(value)
                 setIsValid(isHex)
                 if (isHex) {
-                  setColor(value.startsWith('#') ? value : `#${value}`)
+                  onChange(value.startsWith('#') ? value : `#${value}`)
                 }
               }}
               onBlur={() => {
                 if (isValid) {
-                  setColor(
+                  onChange(
                     inputValue.startsWith('#') ? inputValue : `#${inputValue}`,
                   )
                   setInputValue(inputValue.toUpperCase())

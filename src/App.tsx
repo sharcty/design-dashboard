@@ -4,8 +4,14 @@ import Sidebar from './components/Sidebar'
 import PreviewWorkspace from './components/PreviewWorkspace'
 import TokensPanel from './components/TokensPanel'
 import AccessibilityPanel from './components/AccessibilityPanel'
+import { generatePalette } from './utils/paletteUtils'
+import ColorPicker from './components/ui/ColorPicker'
+import { PalettePreview } from './components/ui/PalettePreview'
 
 function App() {
+  const [color, setColor] = React.useState('#2563eb')
+  const palette = generatePalette(color)
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900">
       {/* 1️⃣ TopBar */}
@@ -16,10 +22,10 @@ function App() {
       {/* 2️⃣ Main content: Sidebar + Preview */}
       <div className="flex flex-1 gap-4 p-4">
         <div className="w-64">
-          <Sidebar />
+          <ColorPicker value={color} onChange={setColor} />
         </div>
         <div className="flex-1 bg-white p-4 border rounded">
-          <PreviewWorkspace />
+          <PalettePreview palette={palette} />
         </div>
       </div>
 

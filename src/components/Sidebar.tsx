@@ -1,8 +1,7 @@
 import * as React from 'react'
-import ColorPicker from './ui/ColorPicker'
 
 export function Sidebar() {
-  return <ColorPicker></ColorPicker>
+  return <div></div>
 }
 
 export default Sidebar
