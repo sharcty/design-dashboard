@@ -1,7 +1,5 @@
 import React from 'react'
 import TopBar from './components/TopBar'
-import Sidebar from './components/Sidebar'
-import PreviewWorkspace from './components/PreviewWorkspace'
 import TokensPanel from './components/TokensPanel'
 import AccessibilityPanel from './components/AccessibilityPanel'
 import { generatePalette } from './utils/paletteUtils'
